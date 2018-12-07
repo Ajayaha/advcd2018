@@ -1,7 +1,7 @@
 '''
 Created on 6 dec. 2018
 
-@author: Ajayaha
+@author: Ajayaha<>
 '''
 from builtins import range
 from collections import Counter
