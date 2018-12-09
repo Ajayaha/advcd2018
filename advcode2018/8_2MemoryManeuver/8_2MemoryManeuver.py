@@ -7,7 +7,6 @@ Created on 8 dec. 2018
 inputList = []
 index = 0
 keyVal = 1;
-sumOfMeta = 0
 
 
 def readinput():
@@ -25,9 +24,9 @@ class Node(object):
         self.m_noOfMetadata = None
         self.m_key = keyVal
         keyVal += 1
-        
-    def getKey(self): 
-        return self.m_key
+        self.m_value = 0
+        self.m_arrayOfValues = []
+        self.m_listOfMeta = []
     
     def setNoOfChildren(self, obj): 
         self.m_noOfChildren = obj
@@ -40,11 +39,16 @@ class Node(object):
 
     def getNoOfMetadata(self): 
         return (self.m_noOfMetadata)
+    
+    def getListOfMetadata(self): 
+        return (self.m_listOfMeta)
+    
+    def getarrayOfValues(self): 
+        return (self.m_arrayOfValues)
 
-    def insertNode(self):
+    def getValueOfRootNode(self):
         global keyVal
         global index
-        global sumOfMeta
         self.setNoOfChildren(inputList[index])
         index += 1
         self.setNoOfMetadata(inputList[index])
@@ -54,14 +58,28 @@ class Node(object):
             # work before call
             node = Node()
             # recursive call
-            node.insertNode()
+            self.getarrayOfValues().append(node.getValueOfRootNode())
+        
         for j in range (0, self.getNoOfMetadata()):
-            sumOfMeta += inputList[index]
+            self.getListOfMetadata().append(inputList[index])
             index += 1
-            # work after call
+        # work after call
+        self.calculateValue()
+        return(self.m_value)
 
+    def calculateValue(self):
+        if self.getNoOfChildren() == 0:
+            for count in range(0, self.getNoOfMetadata()):
+                self.m_value += self.getListOfMetadata()[count]
+        else:
+            for count in range(0, len(self.getListOfMetadata())):
+                # add if  it is present
+                # skip it is not present
+                if(self.getListOfMetadata()[count] <= len(self.getarrayOfValues())):
+                    self.m_value += self.getarrayOfValues()[self.getListOfMetadata()[count] - 1]
 
+        
 readinput()
 nodeTree = Node()
-nodeTree.insertNode()
-print(sumOfMeta)
+nodeTree.getValueOfRootNode()
+print(nodeTree.m_value)
