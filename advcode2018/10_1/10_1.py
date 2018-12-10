@@ -30,7 +30,7 @@ def printAndProcess():
         W = 100
         if(((xmin + W) >= xmax) and ((ymin + W) >= ymax)):
             f.write(str(t))
-            f.write("\n") 
+            f.write(":") 
             f.write("\n") 
             for yval in range(ymin, ymax + 1):
                 for xval in range(xmin, xmax + 1):
@@ -40,6 +40,7 @@ def printAndProcess():
                     else:
                         # print('.', end='')
                         f.write('.')
+                f.write("\n")
                 f.write("\n")
                 
         for dataelem in data:
