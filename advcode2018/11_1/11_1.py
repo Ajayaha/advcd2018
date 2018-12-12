@@ -3,6 +3,7 @@ Created on 11 dec. 2018
 
 @author: Ajayaha
 '''
+import datetime
 
 
 def calcPower(x, y, serial):
@@ -32,8 +33,11 @@ def findResultSize(serial, size_val):
     maxval = -100000000
     size = 0
     pos = (0, 0)
+    a = datetime.datetime.now()
+    b = datetime.datetime.now()
     while size < size_val :
-        print(size, ":", maxval, pos, size)
+        print(size, ":", maxval, pos, "time:", datetime.datetime.now() - a)
+        a = datetime.datetime.now()
         for x in range(1, 300 - size):
             for y in range(1, 300 - size):
                 val = 0
@@ -47,9 +51,9 @@ def findResultSize(serial, size_val):
                 else:
                     pass
         size += 1
-    print(maxval, pos, size)
+    print(maxval, pos, size, "Total time taken:", datetime.datetime.now() - b)
 
-    
+
 def main():
     # print(calcPower(122, 79, 57))
     # print(calcPower(217, 196, 39))
